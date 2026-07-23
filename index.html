@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 언니 생일 축하해 💖</title>
+<style>
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: '맑은 고딕', sans-serif;
+    /* 연노랑, 크림빛 레몬색 그라데이션으로 변경 */
+    background: linear-gradient(135deg, #ffffe0, #fffacd);
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #ff1493;
+    font-size: 2.5rem;
+}
+
+h3#dday {
+    color: #e60073;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.profile {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    margin: 20px auto;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.heart {
+    position: fixed;
+    top: -20px;
+    color: #ff1493;
+    font-size: 25px;
+    animation: fall linear forwards;
+    z-index: 1;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+.firework {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 999;
+    animation: explode 1.2s forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(15); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎂 HAPPY BIRTHDAY 🎂</h1>
+    <h2>💖 손수현 💖</h2>
+    
+    <!-- 디데이 표시 영역 -->
+    <h3 id="dday"></h3>
+
+    <img src="1.jpg" alt="언니 사진" class="profile">
+
+    <p>
+        언니 생일 진심으로 축하해! ❤️<br>
+        나에게 언니가 있어 얼마나 다행인지 몰라<br>
+        언니가 원하는 모든 일이 이루어지고<br>
+        늘 행복한 하루하루를 보낼 수 있길 바라 ✨<br>
+        항상 고맙고 사랑해!!<br>
+    </p>
+
+    <audio controls autoplay loop>
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
+    
+    <p>
+      아래는 언니의 모먼트들을 모아봤어<br>
+      행복했던 나날들을 추억해볼 수 있길!!<br>
+    </p>
+
+    <div class="gallery">
+        <img src="2.jpg" alt="추억 사진 2">
+        <img src="3.jpg" alt="추억 사진 3">
+        <img src="4.jpg" alt="추억 사진 4">
+        <img src="5.jpg" alt="추억 사진 5">
+        <img src="6.jpg" alt="추억 사진 6">
+        <img src="7.jpg" alt="추억 사진 7">
+        <img src="8.jpg" alt="추억 사진 8">
+        <img src="9.jpg" alt="추억 사진 9">
+        <img src="10.jpg" alt="추억 사진 10">
+        <img src="11.jpg" alt="추억 사진 11">
+        <img src="12.jpg" alt="추억 사진 12">
+        <img src="13.jpg" alt="추억 사진 13">
+        <img src="14.jpg" alt="추억 사진 14">
+    </div>
+
+    <p>
+      앞으로도 즐거운 추억들 많이 만들어 나가자!!<br>
+    </p>
+
+</div>
+
+<script>
+/* 디데이 계산 로직 */
+function calculateDday() {
+    const today = new Date();
+    // 2026년 8월 5일을 기준일로 설정 (한국 시간 기준)
+    const targetDate = new Date("2026-08-05T00:00:00+09:00"); 
+    
+    const diff = targetDate.getTime() - today.getTime();
+    const dDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    const ddayElement = document.getElementById("dday");
+    if (dDay > 0) {
+        ddayElement.innerText = `생일까지 D-${dDay}`;
+    } else if (dDay === 0) {
+        ddayElement.innerText = `🎉 오늘이 생일입니다! 🎉`;
+    } else {
+        ddayElement.innerText = `생일로부터 D+${Math.abs(dDay)}`;
+    }
+}
+// 페이지 로드 시 디데이 즉시 계산
+calculateDday();
+
+/* 하트 떨어지기 */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+setInterval(createHeart, 300);
+
+/* 폭죽 */
+function createFirework() {
+    const firework = document.createElement("div");
+    firework.className = "firework";
+    firework.style.left = Math.random() * window.innerWidth + "px";
+    firework.style.top = Math.random() * window.innerHeight + "px";
+    firework.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    document.body.appendChild(firework);
+
+    setTimeout(() => {
+        firework.remove();
+    }, 1200);
+}
+
+for (let i = 0; i < 30; i++) {
+    setTimeout(createFirework, i * 150);
+}
+</script>
+
+</body>
+</html>
